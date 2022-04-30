@@ -7,8 +7,6 @@ export default function Product({ id, title, price, rating, image }) {
   // const [state, dispatch] = useStateValue();
   const [{ basket }, dispatch] = useStateValue();
 
-  console.log("basket :>> ", basket);
-
   const addToBasket = () => {
     dispatch({
       type: "ADD_TO_BASKET",

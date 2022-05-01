@@ -26,10 +26,12 @@ export default function Header() {
         <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <div className="header__options">
-          <span className="header__optionsLineOne">Hello, Guest</span>
-          <span className="header__optionsLineTwo">Sign In</span>
-        </div>
+        <Link to="/login">
+          <div className="header__options">
+            <span className="header__optionsLineOne">Hello, Guest</span>
+            <span className="header__optionsLineTwo">Sign In</span>
+          </div>
+        </Link>
 
         <div className="header__options">
           <span className="header__optionsLineOne">Returns</span>

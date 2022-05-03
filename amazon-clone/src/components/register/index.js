@@ -1,4 +1,4 @@
-import "./Login.css";
+import "./Register.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../db/firebase";
@@ -8,11 +8,12 @@ const initialValues = {
   password: "",
 };
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
     setValues({
       ...values,
@@ -20,34 +21,41 @@ export default function Login() {
     });
   };
 
-  const signIn = (e) => {
-    e.preventDefault();
+  const register = (event) => {
+    event.preventDefault();
     auth
-      .signInWithEmailAndPassword(values.email, values.password)
+      .createUserWithEmailAndPassword(values.email, values.password)
       .then((auth) => {
         console.log("auth", auth);
-        navigate("/");
+        if (auth) {
+          navigate("/login");
+        }
       })
       .catch((error) => {
         alert(error.message);
       });
-
-    //  some fancy firebase login shittt...
   };
 
   return (
-    <div className="login">
+    <div className="register">
       <Link to="/">
         <img
-          className="login__logo"
+          className="register__logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/263px-Amazon_logo.svg.png"
           alt="amazon-logo"
         />
       </Link>
 
-      <div className="login__container">
-        <h1>Sign-In</h1>
+      <div className="register__container">
+        <h1>Create Account</h1>
         <form>
+          {/* <h5>Your name</h5>
+          <input
+            type="text"
+            value={values.displayName}
+            name="displayName"
+            onChange={handleInputChange}
+          /> */}
           <h5>Email or mobile phone number</h5>
           <input
             type="email"
@@ -65,23 +73,19 @@ export default function Login() {
 
           <button
             type="submit"
-            onClick={signIn}
-            className="login__signinButton"
+            onClick={register}
+            className="register__signupButton"
           >
-            Sign in
+            Create account
           </button>
         </form>
-        <p>
-          By signing-in you agree to the AMAZON FAKE CLONE Conditions of Use &
-          Sale. Please see our Privacy Notice, our Cookies Notice and our
-          Interest-Based Ads Notice.
-        </p>
 
-        <Link to="/register">
-          <button className="login__registerButton">
-            Create your Amazon Account
-          </button>
-        </Link>
+        <div className="register__signinText">
+          <span>Do you have an account?</span>
+          <span>
+            <Link to="/login">Sign in</Link>
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -7,10 +7,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 import { useStateValue } from "../../StateProvider";
+import { auth } from "../../db/firebase";
 
 export default function Header() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
 
+  const authHandler = () => {
+    auth.signOut();
+  };
   return (
     <div className="header">
       <Link to="/">
@@ -26,10 +30,16 @@ export default function Header() {
         <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <Link to="/login">
-          <div className="header__options">
-            <span className="header__optionsLineOne">Hello, Guest</span>
-            <span className="header__optionsLineTwo">Sign In</span>
+        <Link to={!user && "/login"}>
+          <div onClick={authHandler} className="header__options">
+            <span className="header__optionsLineOne">
+              {user
+                ? `Hello, ${user?.multiFactor?.user?.email.split("@")[0]}`
+                : "Hello Guest"}
+            </span>
+            <span className="header__optionsLineTwo">
+              {user ? "Sign Out" : "Sign In"}
+            </span>
           </div>
         </Link>
 

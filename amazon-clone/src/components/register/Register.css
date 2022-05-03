@@ -1,0 +1,70 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.register__logo {
+  width: 100px;
+  object-fit: contain;
+  margin: 20px auto;
+}
+
+.register__container {
+  width: 300px;
+  height: fit-content;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.register__container > h1 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.register__container > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__container > form > h5 {
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.register__container > form > input {
+  width: 98%;
+  height: 30px;
+  margin-bottom: 10px;
+  border: 1px solid darkgray;
+  border-radius: 3px;
+}
+
+.register__signupButton {
+  height: 30px;
+  background-color: #f0c14b;
+  margin-bottom: 10px;
+  border: 1px solid;
+  border-color: #a88734 #9c7e31 #846a29;
+}
+
+.register__signinText {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
+}
+
+.register__signinText > span > a {
+  color: #f0c14b;
+  padding-left: 5px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register__signinText > span > a:hover {
+  color: #eab52f;
+}

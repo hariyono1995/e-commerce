@@ -33,9 +33,7 @@ export default function Header() {
         <Link to={!user && "/login"}>
           <div onClick={authHandler} className="header__options">
             <span className="header__optionsLineOne">
-              {user
-                ? `Hello, ${user?.multiFactor?.user?.email.split("@")[0]}`
-                : "Hello Guest"}
+              Hello, {user ? user?.email.split("@")[0] : "Guest"}
             </span>
             <span className="header__optionsLineTwo">
               {user ? "Sign Out" : "Sign In"}
